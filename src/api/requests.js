@@ -26,3 +26,12 @@ export const fetchPopularMovies = async () => {
         })
         .catch(error => error);
 };
+
+export const fetchMovieDetail = async (id) => {
+    const url = `${query.API_BASE_URL}${id}?api_key=${API_KEY}`;
+    return axios.get(url)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => error);
+};
