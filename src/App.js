@@ -1,10 +1,12 @@
 import React from 'react';
 
 import Home from './pages/Home';
-import Header from './pages/Header';
+import Header from './pages/Header/Header';
 import MovieDetail from './pages/MovieDetail';
 import MovieSearch from './pages/MovieSearch';
 import MovieFavorites from './pages/MovieFavorites';
+
+import './App.css';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
