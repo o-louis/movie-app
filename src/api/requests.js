@@ -1,5 +1,5 @@
 import axios from 'axios';
-import * as query from './queriesUtils';
+import * as query from './config';
 
 const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
 
@@ -42,6 +42,19 @@ export const fetchMovieTrailer = async (id) => {
     return axios.get(url)
         .then(response => {
             return response.data;
+        })
+        .catch(error => error);
+};
+
+export const fetchSearchMovies = async (searchQuery) => {
+    const url = `${query.SEARCH_MOVIE.replace(':query', searchQuery)}&api_key=${API_KEY}`;
+    console.log(url);
+    return axios.get(url)
+        .then(response => {
+            const { results } = response.data;
+            if (results.length > 0)
+                return results;
+            return [];
         })
         .catch(error => error);
 };

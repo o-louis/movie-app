@@ -1,5 +1,6 @@
 import React from 'react';
-import { IMG_BASE_URL } from '../../api/queriesUtils';
+
+import { IMG_BASE_URL } from '../../api/config';
 
 const Detail = ({detail}) => {
     const {title, backdrop_path, release_date, genres, overview } = detail;

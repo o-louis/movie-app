@@ -1,14 +1,14 @@
 import React from 'react';
 
-import Home from './pages/Home';
+import Home from './pages/Home/Home';
 import Header from './pages/Header/Header';
-import MovieDetail from './pages/MovieDetail';
-import MovieSearch from './pages/MovieSearch';
-import MovieFavorites from './pages/MovieFavorites';
-
-import './App.css';
+import MovieDetail from './pages/MovieDetail/MovieDetail';
+import MovieSearch from './pages/MovieSearch/MovieSearch';
+import MovieFavorites from './pages/MovieFavorites/MovieFavorites';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import './App.css';
 
 const App = () => {
   return (

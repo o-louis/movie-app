@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ReactPlayer from 'react-player';
-import Detail from '../components/Detail/Detail';
-import { fetchMovieDetail, fetchMovieTrailer } from '../api/requests.js';
-import { YOUTUBE_BASE_URL } from '../api/queriesUtils';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Detail from '../../components/Detail/Detail';
+
+import { YOUTUBE_BASE_URL } from '../../api/config';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { fetchMovieDetail, fetchMovieTrailer } from '../../api/requests.js';
 
 const MovieDetail = (props) => {
     let favoritesMovies = useRef();
@@ -18,12 +19,13 @@ const MovieDetail = (props) => {
     useEffect(() => {
         const checkFavorites = () => {
             favoritesMovies.current = JSON.parse(localStorage.getItem('favoritesMovies')) || [];
+
             // Create a key in localStorage if key is not set yet
             if (!favoritesMovies.current.length) {
                 localStorage.setItem('favoritesMovies', JSON.stringify(favoritesMovies.current));
             } else {
                 // Check if current movie is saved in favorites
-                const element = favoritesMovies.current.find(element => element === id);
+                const element = favoritesMovies.current.find(element =>  element.id === (id*1));
                 if (element) setFavorite(true);
             }
         }
@@ -45,9 +47,18 @@ const MovieDetail = (props) => {
             }).catch(err => console.log(err));
     }, [id]);
 
-    const addToFavorites = () => {
+    const toggleFavorite = () => {
         setFavorite(favorite => !favorite);
-        favoritesMovies.current.push(id);
+
+        const favoriteStatus = !favorite;
+        if (favoriteStatus) {
+            const { poster_path, original_title, id } = detail;
+            const dataMovie = { id, poster_path, original_title };
+            favoritesMovies.current.push(dataMovie);
+        } else {
+            const element = favoritesMovies.current.findIndex(element =>  element.id === (id*1));
+            favoritesMovies.current.splice(element, 1);
+        }
         localStorage.setItem('favoritesMovies', JSON.stringify(favoritesMovies.current));
     }
 
@@ -62,7 +73,7 @@ const MovieDetail = (props) => {
                 className="heart"
                 icon={faHeart}
                 color={favorite ? "red" : "black" }
-                onClick={addToFavorites}
+                onClick={toggleFavorite}
             />
             <button onClick={() => setShowTrailer(true)}>Trailer</button>
             { showTrailer &&

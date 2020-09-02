@@ -1,21 +1,32 @@
 import React from "react";
-import { IMG_BASE_URL } from "../../api/queriesUtils";
+import { useHistory } from 'react-router-dom';
 
-import './PopularMovies.scss';
+import { IMG_BASE_URL } from "../../api/config";
 
-const PopularMovies = ({ popularMovies, goToMovieDetail }) => {
+import './MoviesList.scss';
+
+const DefaultPoster = require('../../assets/default_poster.png');
+
+const MoviesList = ({ title, list}) => {
+    const history = useHistory();
+
+    const goToMovieDetail = (id) => {
+        history.push(`/movie/${id}`)
+    }
+
     return (
         <>
-            <h2 className="main__title">Current popular Movies</h2>
+            <h2 className="main__title">{title}</h2>
             <div className="main__popular-list">
                 {
-                    popularMovies.map((item, index) => (
+                    list.map((item, index) => (
                         <div className="main__popular-list__item" key={index}>
                             <img 
                                 className="main__popular-list__item__img" 
                                 src={`${IMG_BASE_URL}${item.poster_path}`} 
                                 alt={item.original_title}
                                 onClick={() => goToMovieDetail(item.id)}
+                                onError={e => e.target.src=DefaultPoster}
                             />
                         </div>
                     ))
@@ -25,4 +36,4 @@ const PopularMovies = ({ popularMovies, goToMovieDetail }) => {
     );
 };
 
-export default PopularMovies;
+export default MoviesList;
