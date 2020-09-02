@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Home from './pages/Home/Home';
-import Header from './pages/Header/Header';
+import Header from './components/Header/Header';
 import MovieDetail from './pages/MovieDetail/MovieDetail';
 import MovieSearch from './pages/MovieSearch/MovieSearch';
 import MovieFavorites from './pages/MovieFavorites/MovieFavorites';
