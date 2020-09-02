@@ -1,13 +1,14 @@
 import React from 'react';
-import './FeaturedBanner.scss'
 
-const FeaturedBanner = ({ featuredBanner }) => {
+import './FeaturedBanner.scss';
+
+const FeaturedBanner = ({ urlFeaturedBanner }) => {
     return (
         <div className="featured-banner">
-            { featuredBanner &&
+            { urlFeaturedBanner &&
                 <img 
                     className="featured-banner__img"
-                    src={featuredBanner}
+                    src={urlFeaturedBanner}
                     alt="featured"
                 />
             }

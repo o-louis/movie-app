@@ -35,3 +35,13 @@ export const fetchMovieDetail = async (id) => {
         })
         .catch(error => error);
 };
+
+export const fetchMovieTrailer = async (id) => {
+    const url = `${query.TRAILER_MOVIE.replace(':id', id)}?api_key=${API_KEY}`;
+    console.log(url);
+    return axios.get(url)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => error);
+};
