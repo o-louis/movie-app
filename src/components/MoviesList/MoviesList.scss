@@ -1,13 +1,13 @@
 .main {
     width: 90%;
     margin: 0 auto;
-    .main__popular-list {
+    .main__list {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         grid-gap: 15px;
-        .main__popular-list__item {
+        .main__list__item {
             cursor: pointer;
-            .main__popular-list__item__img {
+            .main__list__item__img {
                 transform: scale(1);
                 transition: transform .1s linear;
                 &:hover {

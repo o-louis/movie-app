@@ -16,12 +16,12 @@ const MoviesList = ({ title, list}) => {
     return (
         <>
             <h2 className="main__title">{title}</h2>
-            <div className="main__popular-list">
+            <div className="main__list">
                 {
                     list.map((item, index) => (
-                        <div className="main__popular-list__item" key={index}>
+                        <div className="main__list__item" key={index}>
                             <img 
-                                className="main__popular-list__item__img" 
+                                className="main__list__item__img" 
                                 src={`${IMG_BASE_URL}${item.poster_path}`} 
                                 alt={item.original_title}
                                 onClick={() => goToMovieDetail(item.id)}
