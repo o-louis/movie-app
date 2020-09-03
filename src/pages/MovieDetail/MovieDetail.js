@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactPlayer from 'react-player';
 
 import Detail from '../../components/Detail/Detail';
+import LocalStorageContext from '../../context/LocalStorageContext.js';
 
 import { YOUTUBE_BASE_URL } from '../../api/config';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
@@ -9,57 +10,39 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { fetchMovieDetail, fetchMovieTrailer } from '../../api/requests.js';
 
 const MovieDetail = (props) => {
-    let favoritesMovies = useRef();
-    const id = props.match.params.id;
+    const id = props.match.params.id*1;
     const [detail, setDetail] = useState(null);
     const [favorite, setFavorite] = useState(false);
     const [trailerUrl, setTrailerUrl] = useState('');
     const [showTrailer, setShowTrailer] = useState(false);
+    const { favoritesMovieItems, toggleFavorite } = React.useContext(LocalStorageContext);
 
+    // Fetch Movie Detail
     useEffect(() => {
-        const checkFavorites = () => {
-            favoritesMovies.current = JSON.parse(localStorage.getItem('favoritesMovies')) || [];
-
-            // Create a key in localStorage if key is not set yet
-            if (!favoritesMovies.current.length) {
-                localStorage.setItem('favoritesMovies', JSON.stringify(favoritesMovies.current));
-            } else {
-                // Check if current movie is saved in favorites
-                const element = favoritesMovies.current.find(element =>  element.id === (id*1));
-                if (element) setFavorite(true);
-            }
+        function getFavorites() {
+            const element = favoritesMovieItems.find(element =>  element.id === id);
+            if (element) setFavorite(true);
         }
-
-        checkFavorites();
+        getFavorites();
         fetchMovieDetail(id)
-            .then(response => {
-                setDetail(response);
-            }).catch(err => console.log(err));
-    }, [id]);
+            .then(response => setDetail(response))
+            .catch(err => console.log(err));
+    }, [id, favoritesMovieItems]);
 
+    // Fetch Movie trailer
     useEffect(() => {
         fetchMovieTrailer(id)
             .then(response => {
-                const { results } = response;
-                if (results) {
-                    setTrailerUrl(`${YOUTUBE_BASE_URL}${results[0].key}`);
+                if (response.results) {
+                    const img = `${YOUTUBE_BASE_URL}${response.results[0].key}`;
+                    setTrailerUrl(img);
                 }
             }).catch(err => console.log(err));
     }, [id]);
 
-    const toggleFavorite = () => {
+    const handleFavorite = () => {
         setFavorite(favorite => !favorite);
-
-        const favoriteStatus = !favorite;
-        if (favoriteStatus) {
-            const { poster_path, original_title, id } = detail;
-            const dataMovie = { id, poster_path, original_title };
-            favoritesMovies.current.push(dataMovie);
-        } else {
-            const element = favoritesMovies.current.findIndex(element =>  element.id === (id*1));
-            favoritesMovies.current.splice(element, 1);
-        }
-        localStorage.setItem('favoritesMovies', JSON.stringify(favoritesMovies.current));
+        toggleFavorite(favorite, detail);
     }
 
     if (!detail) {
@@ -73,7 +56,7 @@ const MovieDetail = (props) => {
                 className="heart"
                 icon={faHeart}
                 color={favorite ? "red" : "black" }
-                onClick={toggleFavorite}
+                onClick={handleFavorite}
             />
             <button onClick={() => setShowTrailer(true)}>Trailer</button>
             { showTrailer &&

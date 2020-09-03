@@ -8,11 +8,9 @@ export const fetchTopRatedMovie = async () => {
     return axios.get(url)
         .then(response => {
             const { results } = response.data;
-            if (results.length > 0 && results[0])
-                return results[0];
+            if (results.length > 0 && results[0]) return results[0];
             return {};
-        })
-        .catch(error => error);
+        }).catch(error => error);
 };
 
 export const fetchPopularMovies = async () => {
@@ -20,19 +18,15 @@ export const fetchPopularMovies = async () => {
     return axios.get(url)
         .then(response => {
             const { results } = response.data;
-            if (results.length > 0)
-                return results;
+            if (results.length > 0) return results;
             return [];
-        })
-        .catch(error => error);
+        }).catch(error => error);
 };
 
 export const fetchMovieDetail = async (id) => {
     const url = `${query.API_BASE_URL}${id}?api_key=${API_KEY}`;
     return axios.get(url)
-        .then(response => {
-            return response.data;
-        })
+        .then(response => response.data)
         .catch(error => error);
 };
 
@@ -40,9 +34,7 @@ export const fetchMovieTrailer = async (id) => {
     const url = `${query.TRAILER_MOVIE.replace(':id', id)}?api_key=${API_KEY}`;
     console.log(url);
     return axios.get(url)
-        .then(response => {
-            return response.data;
-        })
+        .then(response => response.data)
         .catch(error => error);
 };
 
@@ -52,9 +44,7 @@ export const fetchSearchMovies = async (searchQuery) => {
     return axios.get(url)
         .then(response => {
             const { results } = response.data;
-            if (results.length > 0)
-                return results;
+            if (results.length > 0) return results;
             return [];
-        })
-        .catch(error => error);
+        }).catch(error => error);
 };

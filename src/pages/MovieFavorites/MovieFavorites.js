@@ -1,23 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import MoviesList from '../../components/MoviesList/MoviesList';
+import LocalStorageContext from '../../context/LocalStorageContext.js';
 
 const MovieFavorites = () => {
-    const [favoritesMovies, setFavoritesMovies] = useState([]);
-    const [mounted, setMounted] = useState(false);
-
-    useEffect(() => {
-        const storage = JSON.parse(localStorage.getItem('favoritesMovies'));
-        if (storage.length > 0) setFavoritesMovies(storage);
-        setMounted(true);
-    }, []);
-
+    const { favoritesMovieItems } = React.useContext(LocalStorageContext);
     return (
         <main className="main">
-            { mounted && favoritesMovies.length > 0 ? (
+            { favoritesMovieItems.length > 0 ? (
                     <MoviesList
                         title="Your favorites list"
-                        list={favoritesMovies}
+                        list={favoritesMovieItems}
                     />
                 ) : (
                     <h2>You could find here you favorites movies list.</h2>

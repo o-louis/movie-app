@@ -11,16 +11,19 @@ const MovieSearch = () => {
     useEffect(() => {
         if (query.length >= 2) {
             fetchSearchMovies(query)
-                .then(response => {
-                    console.log(response);
-                    setResult(response);
-                }).catch(err => console.log(err));
+                .then(response => setResult(response))
+                .catch(err => console.log(err));
         }
     }, [query]);
 
     return (
         <main className="main">
-            <input type="text" value={query} onChange={e => setQuery(e.target.value)} />
+            <input 
+                type="text"
+                value={query} 
+                onChange={e => setQuery(e.target.value)} 
+            />
+
             { query.length >= 2 &&
                 <MoviesList
                     title="Search result"

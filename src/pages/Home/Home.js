@@ -11,33 +11,32 @@ import { fetchTopRatedMovie, fetchPopularMovies } from '../../api/requests.js';
 const Home = () => {
   const history = useHistory();
   const [id, setId] = useState('');
-  const [urlFeaturedBanner, setUrlFeaturedBanner] = useState('');
   const [popularMovies, setPopularMovies] = useState([]);
+  const [urlFeaturedBanner, setUrlFeaturedBanner] = useState('');
 
+  // Fetch top rated Movie
   useEffect(() => {
       fetchTopRatedMovie()
-          .then(response => {
-              setId(response.id);
-              const img = response.backdrop_path ?
-                `${IMG_BASE_URL}${response.backdrop_path}` : '';
-              setUrlFeaturedBanner(img);
+          .then(({id, backdrop_path}) => {
+            setId(id);
+            const img = `${IMG_BASE_URL}${backdrop_path}`;
+            setUrlFeaturedBanner(img);
           }).catch(err => console.log(err));
   }, []);
 
+  // Fetch popular Movies
   useEffect(() => {
       fetchPopularMovies()
-      .then((response) => {
-          setPopularMovies(response);
-      })
-      .catch((err) => console.log(err));
+        .then(response => setPopularMovies(response))
+        .catch((err) => console.log(err));
   }, []);
 
   const goToMovieDetail = () => {
-      history.push(`/movie/${id}`)
+      id && history.push(`/movie/${id}`)
   }
 
   return (
-    <React.Fragment>
+    <>
       <FeaturedBanner 
         urlFeaturedBanner={urlFeaturedBanner}
         goToMovieDetail={goToMovieDetail}
@@ -48,7 +47,7 @@ const Home = () => {
           list={popularMovies}
         />
       </main>
-    </React.Fragment>
+    </>
   );
 };
 

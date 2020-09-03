@@ -9,9 +9,8 @@ const DefaultPoster = require('../../assets/default_poster.png');
 
 const MoviesList = ({ title, list}) => {
     const history = useHistory();
-
     const goToMovieDetail = (id) => {
-        history.push(`/movie/${id}`)
+        id && history.push(`/movie/${id}`);
     }
 
     return (
