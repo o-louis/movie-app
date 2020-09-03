@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-import Context from './LocalStorageContext';
+import LocalStorageContext from './LocalStorageContext';
 
-const ContextProvider = ({ children }) => {
+const LocalStorageProvider = ({ children }) => {
     const [favoritesMovieItems, setFavoritesMovieItems] = useState([]);
 
     useEffect(() => {
@@ -33,10 +33,10 @@ const ContextProvider = ({ children }) => {
     }
 
     return (
-        <Context.Provider value={{favoritesMovieItems, toggleFavorite}}>
+        <LocalStorageContext.Provider value={{favoritesMovieItems, toggleFavorite}}>
             {children}
-        </Context.Provider>
+        </LocalStorageContext.Provider>
     )
 }
 
-export default ContextProvider;
+export default LocalStorageProvider;
