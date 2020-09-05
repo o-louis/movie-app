@@ -1,0 +1,53 @@
+.detail {
+    img {
+        opacity: 0.2;
+        position: absolute;
+        z-index: -1;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+    section {
+        .separator {
+            width: 2px;
+            background-color: white;
+            margin: 0 10px;
+            height: 90%;
+        }
+        .detail__title {
+            font-size: 4rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            width: 100%;
+        }
+        .detail__description {
+            font-size: 1.4rem;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .detail__genres {
+            margin-bottom: 10px;
+            ul {
+                display: flex;
+                li {
+                    font-size: 1.2rem;
+                    display: flex;
+                    align-items: center;
+                    text-transform: uppercase;
+                }
+            }
+        }
+        .detail__infos {
+            display: flex;
+            align-items: center;
+            height: 16px;
+            font-size: 1rem;
+            .separator {
+                background-color: #686868;
+            }
+            span {
+                color: #686868;
+            }
+        }
+    }
+}

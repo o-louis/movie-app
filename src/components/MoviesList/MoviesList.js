@@ -7,7 +7,7 @@ import './MoviesList.scss';
 
 const DefaultPoster = require('../../assets/default_poster.png');
 
-const MoviesList = ({ title, list}) => {
+const MoviesList = ({ title, list }) => {
     const history = useHistory();
     const goToMovieDetail = (id) => {
         id && history.push(`/movie/${id}`);
@@ -16,7 +16,7 @@ const MoviesList = ({ title, list}) => {
     return (
         <>
             <h2 className="main__title">{title}</h2>
-            <div className="main__list">
+            <div className="main__list" >
                 {
                     list.map((item, index) => (
                         <div className="main__list__item" key={index}>

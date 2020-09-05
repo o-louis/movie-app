@@ -1,0 +1,58 @@
+.detail {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-position: center;
+    background-size: 100% 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    main {
+        display: grid;
+        grid-column-gap: 100px;
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 1320px;
+        width: 85%;
+        margin: 0 auto;
+        .detail__buttons {
+            display: flex;
+            margin-top: 40px;
+            button {
+                padding: 10px 0;
+                color: white;
+                font-size: 0.9rem;
+                text-transform: uppercase;
+                width: 200px;
+                text-align: center;
+                border-radius: 2px;
+                margin-right: 20px;
+                font-weight: 500;
+                svg {
+                    margin-left: 10px;
+                }
+            }
+            .detail__buttons-trailer {
+                background-color: transparent;
+                border: none;
+                border: 1px solid white;
+                width: 100px;
+                &:hover {
+                    background: white;
+                    color: black;
+                }
+                
+            }
+            .detail__buttons-favorite {
+                background-color: #E70914;
+                border: none;
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
+        }
+    }
+}

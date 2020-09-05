@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    list-style-type: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: Roboto;
+    outline: none;
+    color: white;
+}
+
+body {
+    background-color: black;
+    font-size: 62.5%;
+    overflow: hidden;
+    #root {
+        width: 100vw;
+        height: 100vh;
+        overflow-x: hidden;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    a {
+        color: white;
+    }
+
+    button {
+        cursor: pointer;
+    }
+}

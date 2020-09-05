@@ -4,6 +4,8 @@ import MoviesList from "../../components/MoviesList/MoviesList";
 
 import { fetchSearchMovies } from '../../api/requests.js';
 
+import './MovieSearch.scss';
+
 const MovieSearch = () => {
     const [query, setQuery] = useState("");
     const [result, setResult] = useState([]);
@@ -21,7 +23,8 @@ const MovieSearch = () => {
             <input 
                 type="text"
                 value={query} 
-                onChange={e => setQuery(e.target.value)} 
+                placeholder="Search a movie..."
+                onChange={e => setQuery(e.target.value)}
             />
 
             { query.length >= 2 &&

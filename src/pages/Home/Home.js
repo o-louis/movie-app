@@ -4,23 +4,21 @@ import { useHistory } from 'react-router-dom';
 import MoviesList from "../../components/MoviesList/MoviesList";
 import FeaturedBanner from '../../components/FeaturedBanner/FeaturedBanner.js';
 
-import { IMG_BASE_URL } from '../../api/config';
 import { fetchTopRatedMovie, fetchPopularMovies } from '../../api/requests.js';
 
 
 const Home = () => {
   const history = useHistory();
   const [id, setId] = useState('');
+  const [data, setData] = useState({});
   const [popularMovies, setPopularMovies] = useState([]);
-  const [urlFeaturedBanner, setUrlFeaturedBanner] = useState('');
 
   // Fetch top rated Movie
   useEffect(() => {
       fetchTopRatedMovie()
-          .then(({id, backdrop_path}) => {
-            setId(id);
-            const img = `${IMG_BASE_URL}${backdrop_path}`;
-            setUrlFeaturedBanner(img);
+          .then((response) => {
+            setData(response);
+            setId(response.id);
           }).catch(err => console.log(err));
   }, []);
 
@@ -37,8 +35,8 @@ const Home = () => {
 
   return (
     <>
-      <FeaturedBanner 
-        urlFeaturedBanner={urlFeaturedBanner}
+      <FeaturedBanner
+        data={data}
         goToMovieDetail={goToMovieDetail}
       />
       <main className="main">
